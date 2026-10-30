@@ -1,0 +1,13 @@
+# Keep the original Nordic MBR, USB Open Bootloader and settings intact.
+nrf5_mbr:
+  address: 0x000000
+  size: 0x1000
+  region: flash_primary
+app:
+  address: 0x001000
+  size: 0xdf000
+  region: flash_primary
+nrf5_factory_bootloader:
+  address: 0x0e0000
+  size: 0x20000
+  region: flash_primary

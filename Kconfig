@@ -1,0 +1,3 @@
+mainmenu "OLFs Signal Generator"
+
+source "Kconfig.zephyr"

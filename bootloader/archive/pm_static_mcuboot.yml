@@ -1,0 +1,23 @@
+# PCA10059 bare board: MCUboot replaces the factory boot chain.
+mcuboot:
+  address: 0x000000
+  size: 0x20000
+  region: flash_primary
+mcuboot_pad:
+  address: 0x020000
+  size: 0x200
+  region: flash_primary
+app:
+  address: 0x020200
+  size: 0xdfe00
+  region: flash_primary
+mcuboot_primary:
+  address: 0x020000
+  size: 0xe0000
+  region: flash_primary
+  span: [mcuboot_pad, app]
+mcuboot_primary_app:
+  address: 0x020200
+  size: 0xdfe00
+  region: flash_primary
+  span: [app]

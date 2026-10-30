@@ -1,0 +1,7 @@
+build/
+build-mcuboot/
+host/.zig-cache/
+host/.zig-cache-local/
+**/__pycache__/
+.DS_Store
+signing/private/

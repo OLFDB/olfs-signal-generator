@@ -1,0 +1,20 @@
+{
+  "verified": true,
+  "bootloader": "MCUboot",
+  "first_stage_address": "0x0",
+  "primary_slot": "0x20000..0x100000",
+  "secondary_slot": false,
+  "signature": "ECDSA-P256-SHA256",
+  "version": "1.0.0+0",
+  "validate_primary_each_boot": true,
+  "usb_serial_recovery": true,
+  "boot_flash_protection": true,
+  "swd_locked": false,
+  "public_key_der_sha256": "104a6354cda3b321fc6601343011c8c7355680e2dabc4f88f54f7333ae79acb4",
+  "signed_image_sha256": "9699f611e01ab8cb0204a660955856829d8a26ed1d8eeab65354564326a2c455",
+  "signed_image_bytes": 633862,
+  "bootloader_bytes": 54043,
+  "tampered_image_rejected": true,
+  "wrong_public_key_rejected": true,
+  "hardware_tested": false
+}

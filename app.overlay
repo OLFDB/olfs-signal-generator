@@ -1,0 +1,66 @@
+#include <dt-bindings/usb/audio.h>
+
+/ {
+    chosen {
+        zephyr,console = &cdc_acm_uart1;
+        zephyr,shell-uart = &cdc_acm_uart0;
+    };
+
+    tone_audio: usb_audio2 {
+        compatible = "zephyr,uac2";
+        status = "okay";
+        full-speed;
+        audio-function = <AUDIO_FUNCTION_PRO_AUDIO>;
+
+        tone_clock: clock {
+            compatible = "zephyr,uac2-clock-source";
+            clock-type = "internal-programmable";
+            sof-synchronized;
+            frequency-control = "host-programmable";
+            sampling-frequencies = <44100 48000 96000>;
+        };
+
+        tone_source: source {
+            compatible = "zephyr,uac2-input-terminal";
+            clock-source = <&tone_clock>;
+            terminal-type = <EMBEDDED_TERMINAL_LEVEL_CALIBRATION_NOISE_SOURCE>;
+            front-left;
+            front-right;
+        };
+
+        tone_usb_out: usb_out {
+            compatible = "zephyr,uac2-output-terminal";
+            data-source = <&tone_source>;
+            clock-source = <&tone_clock>;
+            terminal-type = <USB_TERMINAL_STREAMING>;
+        };
+
+        stream {
+            compatible = "zephyr,uac2-audio-streaming";
+            linked-terminal = <&tone_usb_out>;
+            /* Base alternate 1; project extension adds 24-bit alternate 2. */
+            subslot-size = <2>;
+            bit-resolution = <16>;
+            polling-period-us = <1000>;
+        };
+    };
+};
+
+/* The board supplies a fourth CDC instance by default. */
+&board_cdc_acm_uart {
+    status = "disabled";
+};
+
+&zephyr_udc0 {
+    status = "okay";
+
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+        label = "OLF Shell";
+    };
+
+    cdc_acm_uart1: cdc_acm_uart1 {
+        compatible = "zephyr,cdc-acm-uart";
+        label = "OLF Logs";
+    };
+};
